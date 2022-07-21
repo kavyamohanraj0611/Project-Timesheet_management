@@ -1,0 +1,38 @@
+.master{
+    background-image: url(/assets/img/bgimg.webp);
+    width: 100%;
+    height: 90.8%;
+  }
+  .topic{
+      margin-left: 22%;
+  }
+  .form-container{
+      background-size: 100%;
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      opacity: 1;
+  }
+  .row{
+      width: 80%;
+  }
+  .content{
+      margin-left: 20%;
+  }
+  input,select{
+      margin-top: 3%;
+      height: 30%;
+      margin-bottom: 15%;
+  }
+  label{
+      margin-bottom: 4%;
+      margin-top: 3%;
+      float: left;
+  }
+  button{
+    margin-right: 4%;
+  }
+  .back{
+    margin-right: 5%;
+  }
+  

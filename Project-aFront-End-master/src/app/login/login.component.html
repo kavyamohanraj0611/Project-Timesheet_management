@@ -1,0 +1,40 @@
+<div [style.backgroundImage]="'url(/assets/img/log.jpg)'" class="login-container">
+    <div><br><br>
+        <form #loginForm="ngForm" class="form-container rounded">
+            <div>
+                <div class="bg-dark">
+                    <h3 class="p-2 text-white border-0"><b>LOGIN</b></h3>
+                </div>
+                <label><b>Username (Your Employee ID)</b></label>
+                <input type="text" #employeeId="ngModel" class="form-control" pattern="^(ACE)[0-9]{4}$"
+                    [class.is-invalid]="employeeId.invalid && employeeId.touched" name="employeeId"
+                    [(ngModel)]="employeeService.employeeId" required>
+                <small *ngIf="employeeId.errors?.['required']" class="text-danger" [class.d-none]="employeeId.untouched">Enter your
+                    Username</small>
+                <small *ngIf="employeeId.errors?.['pattern']" class="text-danger"
+                    [class.d-none]="employeeId.untouched||employeeId.valid">Username must start with ACE followed by 4 digits </small>
+            </div>
+            <div>
+                <label><b>Password</b></label>
+                <input type="password" #password="ngModel" class="form-control"
+                    pattern="^([A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                    [class.is-invalid]="password.invalid && password.touched" name="password"
+                    [(ngModel)]="employeeService.password" required>
+                <small class="text-danger" *ngIf="password.errors?.['required']"
+                    [class.d-none]="password.untouched">Enter
+                    your Password</small>
+                <small *ngIf="password.errors?.['pattern']" class="text-danger"
+                    [class.d-none]="password.untouched||password.valid">Password must be Alphanumeric and contain
+                    atleast 8 letters </small>
+            </div>
+            <div class="btns">
+                <button class="btn btn-success btn-sm" [disabled]="loginForm.form.invalid"
+                    (click)="login(loginForm)">Login</button>
+            </div><br>
+            <div class="new">
+                <label class="newLabel">New User ?&nbsp;&nbsp;&nbsp;</label>
+                <button class="btn btn-primary btn-sm" (click)="signUp()"><span>Sign Up</span></button>
+            </div>
+        </form><br><br>
+    </div>
+</div>

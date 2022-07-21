@@ -1,0 +1,124 @@
+<div [style.backgroundImage]="'url(/assets/img/img2.webp)'" class="master">
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <button class="fa fa-arrow-left border-0 bg-transparent text-light back" (click)="cancel()"></button>
+            <div *ngIf="formTypeEdit" class="head">
+                <button class="btn btn-primary fa fa-sign-in" *ngIf="!employeeService.loggedIn()"
+                    (click)="employeeService.logout()">Login</button>
+                <button class="btn btn-primary fa fa-sign-out" *ngIf="employeeService.loggedIn()"
+                    (click)="employeeService.logout()">Logout</button>
+            </div>
+        </nav>
+    </div><br><br>
+    <div class="signUp-container rounded"><br><br>
+        <form #signUpForm="ngForm" class="form-container rounded">
+            <div class="bg-dark">
+                <h3 *ngIf="formTypeEdit" class="p-2 text-white border-0"><b>EDIT EMPLOYEE</b></h3>
+                <h3 *ngIf="!formTypeEdit" class="p-2 text-white border-0"><b>SIGN-UP</b></h3>
+            </div>
+            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="employeeService._id">
+            <div>
+                <label><b>First Name</b></label>
+                <input type="text" #first_name="ngModel" class="form-control" pattern="^[A-Za-z]{2,}$"
+                    [class.is-invalid]="first_name.invalid && first_name.touched" name="first_name"
+                    [(ngModel)]="employeeService.first_name" required>
+                <small *ngIf="first_name.errors?.['required']" class="text-danger"
+                    [class.d-none]="first_name.untouched">Enter your First name</small>
+                <small *ngIf="first_name.errors?.['pattern']" class="text-danger"
+                    [class.d-none]="first_name.untouched||first_name.valid">First name should only contain Alphabets
+                </small>
+            </div>
+            <div>
+                <label><b>Last Name</b></label>
+                <input type="text" #last_name="ngModel" class="form-control" pattern="^[A-Za-z]{1,}$"
+                    [class.is-invalid]="last_name.invalid && last_name.touched" name="last_name"
+                    [(ngModel)]="employeeService.last_name" required>
+                <small *ngIf="last_name.errors?.['required']" class="text-danger"
+                    [class.d-none]="last_name.untouched">Enter your Last name</small>
+                <small *ngIf="last_name.errors?.['pattern']" class="text-danger"
+                    [class.d-none]="last_name.untouched||last_name.valid">Last name should only contain Alphabets
+                </small>
+            </div>
+            <div>
+                <label><b>Employee ID</b></label>
+                <input type="text" #employeeId="ngModel" class="form-control" pattern="^(ACE)[0-9]{4}$"
+                    [class.is-invalid]="employeeId.invalid && employeeId.touched" name="employeeId"
+                    [(ngModel)]="employeeService.employeeId"  disabled="{{formTypeEdit}}" required>
+                    
+                <small *ngIf="employeeId.errors?.['required']" class="text-danger"
+                    [class.d-none]="employeeId.untouched">Enter your Employee Id</small>
+                <small *ngIf="employeeId.errors?.['pattern']" class="text-danger"
+                    [class.d-none]="employeeId.untouched||employeeId.valid">Employee Id must start with ACE followed by
+                    4 digits </small>
+            </div>
+            <div>
+                <label><b>Email ID</b></label>
+                <input type="email" #emailId="ngModel" class="form-control"
+                    pattern="^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                    [class.is-invalid]="emailId.invalid && emailId.touched" name="emailId"
+                    [(ngModel)]="employeeService.emailId" required>
+                <small *ngIf="emailId.errors?.['required']" class="text-danger" [class.d-none]="emailId.untouched">Enter
+                    your Email Id</small>
+                <small *ngIf="emailId.errors?.['pattern']" class="text-danger"
+                    [class.d-none]="emailId.untouched||emailId.valid">Invalid Email</small>
+            </div>
+            <div>
+                <label><b>Department</b></label><br>
+                <select #department="ngModel" [(ngModel)]="employeeService.department" name="department" class="rounded"
+                    [class.is-invalid]="department.invalid && department.touched" disabled="{{enableField}}" required>
+                    <option value="" hidden>Select your Department</option>
+                    <option value="LAMP">LAMP</option>
+                    <option value="DOTNET">DOTNET</option>
+                    <option value="EBA">EBA</option>
+                    <option value="ORACLE">ORACLE</option>
+                    <option value="IAS">IAS</option>
+                </select><br>
+                <small *ngIf="department.errors?.['required']" class="text-danger"
+                    [class.d-none]="role.valid||department.untouched">Select your
+                    Department</small>
+            </div>
+            <div>
+                <label><b>Role</b></label><br>
+                <select #role="ngModel" [(ngModel)]="employeeService.role" name="role" class="rounded"
+                    [class.is-invalid]="role.invalid && role.touched"  disabled="{{enableField}}" required>
+                    <option value="" hidden>Select your Role</option>
+                    <option value="Employee">Employee</option>
+                    <option value="Manager">Manager</option>
+                </select><br>
+                <small class="text-danger" [class.d-none]="role.valid||role.untouched">Select your Role</small>
+
+            </div>
+            <div *ngIf="!formTypeEdit">
+                <label><b>Password</b></label>
+                <input type="password" #password="ngModel" class="form-control"
+                    pattern="^([A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                    [class.is-invalid]="password.invalid && password.touched" name="password"
+                    [(ngModel)]="employeeService.password" required>
+                <small class="text-danger" *ngIf="password.errors?.['required']"
+                    [class.d-none]="password.untouched">Enter
+                    your Password</small>
+                <small *ngIf="password.errors?.['pattern']" class="text-danger"
+                    [class.d-none]="password.untouched||password.valid">Password must be Alphanumeric and contain
+                    atleast 8 letters</small>
+            </div>
+            <div *ngIf="!formTypeEdit">
+                <label><b>Confirm Password</b></label>
+                <input type="password" #confirmPass="ngModel" class="form-control"
+                    pattern="^([A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                    [class.is-invalid]="confirmPass.invalid && confirmPass.touched" name="confirmPass"
+                    [(ngModel)]="employeeService.confirmPass" (keyup)="checkPass($event)" required>
+                <small class="text-danger" *ngIf="confirmPass.errors?.['required']; else elseBlock"
+                    [class.d-none]="confirmPass.untouched">Enter your Password</small>
+                <ng-template #elseBlock><small *ngIf="visible && confirmPass.touched " class="text-danger">Password does
+                        not match</small></ng-template>
+            </div>
+            <div class="btn">
+                <button class="btn btn-dark btn-sm mt-4 mb-2" (click)="cancel()">Cancel</button>
+                <button *ngIf="!formTypeEdit" [disabled]="signUpForm.form.invalid"
+                    class="btn btn-primary mt-4 mb-2 btn-sm" (click)="register(signUpForm)">Sign up</button>
+                <button *ngIf="formTypeEdit" [disabled]="signUpForm.form.invalid"
+                    class="btn btn-primary mt-4 mb-2 btn-sm" (click)="register(signUpForm)">Update</button>
+            </div>
+        </form><br><br>
+    </div>
+</div>

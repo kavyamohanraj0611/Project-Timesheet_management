@@ -1,0 +1,50 @@
+input,label{
+    margin-top: 20px;
+    margin-left: 75px;
+    font-size: 18px;
+}
+input{
+    width: 70%;
+    height:30px;
+}
+small{
+    margin-left: 75px;
+}
+.btns{
+    margin-left: 220px;
+    margin-top: 20px;
+}
+.btn{
+    font-size: small;
+}
+.newLabel{
+    font-size: small;
+    font-weight: bold;   
+}
+.new{
+    margin-bottom: 15px;
+}
+.login-container{
+    background-size: 100%;
+    width: 100%;
+    height: 90.8%;
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+h3{
+    margin-top:0px;
+    margin-left: 30%;
+    text-align: center;
+    border: 2px solid black;
+    width: 35%;
+    height: 50px;
+    font-size:25px;
+    opacity: 0.85;
+}
+.form-container{
+    margin-left: 33%;
+    border: 2px solid black;
+    width:35% ;
+    opacity: 0.9;
+    background-color:rgb(134, 152, 182);   
+}

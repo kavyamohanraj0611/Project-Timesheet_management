@@ -1,0 +1,36 @@
+<div class="employee-body-container">
+    <table class="table table-striped table-hover">
+        <thead class="table bg-secondary text-light">
+            <tr class="table bg-warning m-2 t-head">
+                <th colspan="7">EMPLOYEE LIST</th>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Employee Id</th>
+                <th>Email Id</th>
+                <th>Department</th>
+                <th>Role</th>
+                <th>Edit Sheet</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                *ngFor="let emp of employeeService.employees | paginate:{id:'pagination_list',itemsPerPage:8,currentPage:page,totalItems:totalEmployees} ">
+                <td>{{emp.first_name}}</td>
+                <td>{{emp.last_name}}</td>
+                <td>{{emp.employeeId}}</td>
+                <td>{{emp.emailId}}</td>
+                <td>{{emp.department}}</td>
+                <td>{{emp.role}}</td>
+                <td><button class="fa fa-pencil-square-o btn-warning " (click)="editEmployee(emp)"></button>
+                    <button class="fa fa-trash-o btn-danger " (click)="deleteEmployee(emp)"></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div #noData1 *ngIf="visible" class="text-center p-2">No datas to display</div><br>
+    <div>
+        <pagination-controls class="text-center" id="pagination_list" (pageChange)="page=$event"></pagination-controls>
+    </div>
+</div>

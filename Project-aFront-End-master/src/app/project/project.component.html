@@ -1,0 +1,95 @@
+<div [style.backgroundImage]="'url(/assets/img/bgimg.webp)'"  class="master">
+    <div >
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <button class="fa fa-arrow-left border-0 bg-transparent text-light back" (click)="cancel()"></button>
+        <div class="head ">
+            <button class="fa fa-user border-0 bg-dark text-white user" title="My Profile" (click)="profile()" >&nbsp;&nbsp;{{employeeService.userName}}</button>
+            <button class="btn btn-primary fa fa-sign-in" *ngIf="!employeeService.loggedIn()" (click)="employeeService.logout()">Login</button>
+            <button class="btn btn-primary fa fa-sign-out" *ngIf="employeeService.loggedIn()"
+                (click)="employeeService.logout()">Logout</button>
+            </div>
+        </nav>
+    </div><br><br>
+<div class="project-container rounded">
+    <h3 class="pt-2 bg-secondary rounded"><b>Project Details</b></h3>
+    <form #projectForm="ngForm" class="form-container rounded">
+        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="projectService._id">
+        <div>
+            <label><b>Project Title</b></label>
+            <input type="text" #title="ngModel" class="form-control" pattern="^[A-Za-z- ]{2,}$"
+                [class.is-invalid]="title.invalid && title.touched" name="title" [(ngModel)]="projectService.title"
+                required>
+                <small *ngIf="title.errors?.['required']" class="text-danger" [class.d-none]="title.untouched">Enter the
+                    Project Title</small>
+                <small *ngIf="title.errors?.['pattern']" class="text-danger"
+                    [class.d-none]="title.untouched||title.valid">Project Title should only contain Alphabets </small>
+        </div>
+        <div>
+            <label><b>Description</b></label>
+            <input type="text" #description="ngModel" class="form-control"
+                [class.is-invalid]="description.invalid && description.touched" name="description"
+                [(ngModel)]="projectService.description" required>
+                <small *ngIf="description.errors?.['required']" class="text-danger" [class.d-none]="description.untouched">Enter the
+                    Description of the Project</small>
+        </div>
+        <div>
+            <label><b>Technologies:</b></label><br>
+            <input type="text" #technologies="ngModel" [(ngModel)]="projectService.technologies" name="technologies" class="rounded"
+            [class.is-invalid]="technologies.invalid && technologies.touched" hidden>
+            <ul class="list-unstyled ">
+                <li><label><b>Front-end</b></label>
+                    <input #frontEndTech="ngModel" [(ngModel)]="projectService.frontEndTech" pattern="^[A-Za-z0-9]{1,}$" name="frontEndTech"
+                        class="rounded tech" [class.is-invalid]="frontEndTech.invalid && frontEndTech.touched"
+                        required><br>
+                        <small *ngIf="frontEndTech.errors?.['required']" class="text-danger" [class.d-none]="frontEndTech.untouched">Enter the
+                            Front-End technology used</small>
+                        <small *ngIf="frontEndTech.errors?.['pattern']" class="text-danger"
+                            [class.d-none]="frontEndTech.untouched||frontEndTech.valid">Technology name can be Alphanumeric</small>
+
+                </li>
+                <li><label><b>Back-end</b></label>
+                    <input #backEndTech="ngModel" [(ngModel)]="projectService.backEndTech" pattern="^[A-Za-z0-9]{1,}$" name="backEndTech"
+                        class="rounded tech" [class.is-invalid]="backEndTech.invalid && backEndTech.touched"
+                        required><br>
+                        <small *ngIf="backEndTech.errors?.['required']" class="text-danger" [class.d-none]="backEndTech.untouched">Enter the
+                            Back-End technology used</small>
+                        <small *ngIf="backEndTech.errors?.['pattern']" class="text-danger"
+                            [class.d-none]="backEndTech.untouched||backEndTech.valid">Technology name can be Alphanumeric</small>
+
+                </li>
+                <li><label><b>Database</b></label>
+                    <input #database="ngModel" [(ngModel)]="projectService.database" pattern="^[A-Za-z0-9]{1,}$" name="database"
+                        class="rounded tech" [class.is-invalid]="database.invalid && database.touched"
+                        required><br>
+                        <small *ngIf="database.errors?.['required']" class="text-danger" [class.d-none]="database.untouched">Enter the
+                        Database used</small>
+                        <small *ngIf="database.errors?.['pattern']" class="text-danger"
+                            [class.d-none]="database.untouched||database.valid">Database name can be Alphanumeric</small>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <label><b>Created On</b></label>
+            <input type="date" #createdOn="ngModel" class="form-control"
+                [class.is-invalid]="createdOn.invalid && createdOn.touched" name="createdOn"
+                [(ngModel)]="projectService.createdOn" required>
+            <small class="text-danger" [class.d-none]="createdOn.valid || createdOn.untouched">Enter Projet Created
+                date</small>
+        </div>
+        <div>
+            <label><b>Deadline</b></label><br>
+            <input type="date" #deadline="ngModel" class="form-control"
+                [class.is-invalid]="deadline.invalid && deadline.touched" name="deadline"
+                [(ngModel)]="projectService.deadline" required>
+            <small class="text-danger" [class.d-none]="deadline.valid || deadline.untouched">Enter deadine date of the
+                project</small>
+        </div><br>
+
+        <div class="btns">
+            <button class="btn btn-secondary btn-sm btns" (click)="cancel()">Cancel</button>
+            <button [disabled]="projectForm.form.invalid" class="btn btn-primary btn-sm btns"
+                (click)="addProject(projectForm)">Submit</button>
+        </div>
+    </form>
+    <br><br>
+</div>

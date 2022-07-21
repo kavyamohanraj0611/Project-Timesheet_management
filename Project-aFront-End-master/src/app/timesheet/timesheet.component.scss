@@ -1,0 +1,62 @@
+
+input,label,select,textarea{
+    margin-top: 20px;
+    margin-left: 70px;
+    font-size: 18px;
+}
+input,select{
+    width: 75%;
+    height:40px;
+}
+textarea{
+    width: 75%;
+    height:100px;
+    resize: none;
+    overflow:auto;
+}
+small{
+    margin-left: 12%;
+}
+h3{
+    margin-left: 30%;
+    text-align: center;
+    border: 2px solid black;
+    width: 40%;
+    height: 50px;
+    font-size:22px;
+    opacity: 0.85;
+}
+.timesheet-container{
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+.form-container{
+    margin-left: 30%;
+    border: 2px solid black;
+    width:40% ;
+    background-color:rgb(134, 152, 182);
+    opacity: 0.9;
+    margin-bottom: 0px;
+}
+.btns{
+    margin-left: 90px;
+}
+
+.back{
+    padding-left:10px;
+    font-size: xx-large;
+}
+.head{
+    margin-left: 1147px;
+}
+
+.user{
+    font-size: 15px;
+    margin-right: 16px;
+}
+.navbar{
+    padding:15px
+}

@@ -1,0 +1,67 @@
+
+input,label,select{
+    margin-top: 22px;
+    margin-left: 90px;
+    font-size: 18px;
+}
+input{
+    width: 70%;
+    height:30px;
+}
+small{
+    margin-left: 90px;
+}
+h3{
+    margin-top:10px;
+    margin-left: 30%;
+    text-align: center;
+    border: 2px solid black;
+    width: 40%;
+    height: 50px;
+    font-size:25px;
+}
+.project-container{
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+.form-container{
+    margin-left: 30%;
+    border: 2px solid black;
+    width:40% ;
+    background-color:rgb(134, 152, 182);
+    opacity: 0.9;
+    margin-bottom: 0px;
+}
+.btns{
+    float: none;
+    margin: 10px 0px;
+    margin-left:90px;
+}
+.tech{
+    width: 40%;
+    height: 25px;
+    margin-left: 20px;
+}
+.err{
+    margin-left: 32%;
+}
+
+.back{
+    padding-left:10px;
+    font-size: xx-large;
+}
+
+.head{
+    margin-left: 1140px;
+}
+
+.user{
+    font-size: 15px;
+    margin-right: 16px;
+}
+.navbar{
+    padding:15px
+}

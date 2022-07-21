@@ -1,0 +1,82 @@
+<div [style.backgroundImage]="'url(/assets/img/bgimg.webp)'" class="master">
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <button class="fa fa-arrow-left border-0 bg-transparent text-light back" (click)="cancel()"></button>
+            <div class="head ">
+                <button class="fa fa-user border-0 bg-dark text-white user" title="My Profile"
+                (click)="profile()">&nbsp;&nbsp;{{employeeService.userName}}</button>
+                <button class="btn btn-primary fa fa-sign-in" *ngIf="!employeeService.loggedIn()"
+                    (click)="employeeService.logout()">Login</button>
+                <button class="btn btn-primary fa fa-sign-out" *ngIf="employeeService.loggedIn()"
+                    (click)="employeeService.logout()">Logout</button>
+            </div>
+        </nav>
+    </div><br><br>
+
+    <div class="timesheet-container rounded"><br><br>
+        <form #timesheetForm="ngForm" class="form-container rounded">
+            <div class="bg-dark">
+                <h3 class="p-2 text-white text-center border-0"><b>TIMESHEET FORM</b></h3>
+            </div>
+            <input type="text" name="_id" #_id="ngModel" [(ngModel)]="timesheetService._id" hidden>
+            <div>
+                <label><b>Project Name</b></label>
+                <select #project_name="ngModel" class="form-control" pattern="^[A-Za-z-_ ]{2,}$"
+                    [class.is-invalid]="project_name.invalid && project_name.touched" name="project_name"
+                    [(ngModel)]="timesheetService.project_name" required>
+                    <option hidden>Select your project</option>
+                    <option *ngFor="let list of projects" [value]="list.title">{{list.title}}</option>
+                </select>
+                <small class="text-danger" [class.d-none]="project_name.valid || project_name.untouched">Select the
+                    Project Name</small>
+            </div>
+            <div>
+                <label><b>Date</b></label>
+                <input type="date" #date="ngModel" class="form-control"
+                    [class.is-invalid]="date.invalid && date.touched" name="date" min="{{minDate}}" max="{{maxDate}}"
+                    [(ngModel)]="timesheetService.date" required>
+                <small *ngIf="date.errors?.['required']" class="text-danger" [class.d-none]="date.untouched">Enter the
+                    Date</small>
+            </div>
+            <div>
+                <label><b>Timesheet Name</b></label>
+                <input type="text" #timesheet_name="ngModel" class="form-control" pattern="^[A-Za-z-_ \d]{2,}$"
+                    [class.is-invalid]="timesheet_name.invalid && timesheet_name.touched" name="timesheet_name"
+                    [(ngModel)]="timesheetService.timesheet_name" required>
+                <small *ngIf="timesheet_name.errors?.['required']" class="text-danger"
+                    [class.d-none]="timesheet_name.untouched">Enter your
+                    Timesheet name</small>
+                <small *ngIf="timesheet_name.errors?.['pattern']" class="text-danger"
+                    [class.d-none]="timesheet_name.untouched||timesheet_name.valid">Invalid Timesheet Name</small>
+            </div>
+            <div>
+                <label><b>Added By</b></label><br>
+                <input type="text" #addedBy="ngModel" class="form-control"
+                    [class.is-invalid]="addedBy.invalid && addedBy.touched" name="addedBy"
+                    [(ngModel)]="timesheetService.addedBy" [disabled]="true">
+            </div>
+            <div>
+                <label><b>Description</b></label>
+                <textarea type="text" #description="ngModel" class="form-control"
+                    [class.is-invalid]="description.invalid && description.touched" name="description"
+                    [(ngModel)]="timesheetService.description" required>
+            </textarea>
+                <small class="text-danger" [class.d-none]="description.valid || description.untouched ">Enter the
+                    description of task</small>
+            </div>
+            <div>
+                <label><b>Duration (in Hours) </b></label>
+                <input type="time" #duration="ngModel" class="form-control without_ampm"
+                    [class.is-invalid]="duration.invalid && duration.touched" name="duration"
+                    [(ngModel)]="timesheetService.duration" required>
+                <small class="text-danger" [class.d-none]="duration.valid || duration.untouched">Enter
+                    Duration</small><br>
+            </div>
+            <div class="btns">
+                <button class="btn btn-dark cancel btn-sm mt-2 mb-3 btns" (click)="cancel()">Cancel</button>
+                <button type="button" [disabled]="timesheetForm.form.invalid"
+                    class="btn btn-primary btn-sm mt-2 mb-3 btns" (click)="Onsubmit(timesheetForm)">Submit</button>
+            </div>
+        </form><br><br>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="timesheet-body-container">
+    <div class="btns">
+        <button class="fa fa-plus btn btn-success" title="Add new timesheet" *ngIf="!employeeService.showAllTimesheets" 
+            (click)="createTimeSheet()">&nbsp;<b>Add</b></button>
+    </div>
+    <router-outlet></router-outlet>
+    <table class="table table-striped table-hover">
+        <thead class="table bg-secondary text-light">
+            <tr class="table bg-warning t-head">
+                <th colspan="7"> TIMESHEET LIST</th>
+            </tr>
+            <tr class="timesheets">
+                <th>Project Name</th>
+                <th>Date</th>
+                <th>TimeSheet</th>
+                <th>Added By</th>
+                <th>Description</th>
+                <th>Duration (In Hrs) </th>
+                <th *ngIf="!employeeService.showAllTimesheets">Edit Sheet</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="!employeeService.showAllTimesheets" id="ts">
+            <tr
+                *ngFor="let ts of timesheetService.myTimesheets | paginate:{id:'pagination_list',itemsPerPage:8,currentPage:page,totalItems:totalMyTimesheets} ">
+                <td>{{ts.project_name}}</td>
+                <td>{{ts.date | date : 'dd/mm/yyyy' }}</td>
+                <td>{{ts.timesheet_name}}</td>
+                <td>{{ts.addedBy}}</td>
+                <td>{{ts.description}}</td>
+                <td>{{ts.duration}}</td>
+                <td><button class="fa fa-pencil-square-o btn-warning " title="Edit Timesheet" (click)="editTimeSheet(ts)"></button>
+                    <button class="fa fa-trash-o btn-danger " title="Delete TimeSheet" (click)="deleteTimeSheet(ts)"></button>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="employeeService.showAllTimesheets" id="ts">
+            <tr
+                *ngFor="let ts of timesheetService.timesheets | paginate:{id:'pagination_list',itemsPerPage:8,currentPage:page,totalItems:totalTimesheets} ">
+                <td>{{ts.project_name}}</td>
+                <td>{{ts.date | date : 'dd/mm/yyyy' }}</td>
+                <td>{{ts.timesheet_name}}</td>
+                <td>{{ts.addedBy}}</td>
+                <td>{{ts.description}}</td>
+                <td>{{ts.duration}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div #noData *ngIf="visible" class="text-center m-3 text-dark">No datas to display</div><br>
+    <div>
+        <pagination-controls class="text-center" id="pagination_list" (pageChange)="page=$event"></pagination-controls>
+    </div>
+
+
+</div>
